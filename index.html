@@ -572,6 +572,50 @@
                     rgba(204, 0, 0, .7));
         }
 
+        /* Make the panel a flex column so body can stretch */
+.panel {
+  display: flex;
+  flex-direction: column;
+  /* keep your background/border/overflow as-is */
+}
+
+/* Let the panel body consume vertical space and allow its children to flex */
+.panel-body {
+  flex: 1 1 auto;
+  min-height: 0;           /* critical for nested flex scroll areas */
+  display: flex;
+  flex-direction: column;
+}
+
+/* The visible section (Batting/Fielding) should also be flex to pass height down */
+.section.active {
+  display: flex;           /* replaces display:block for active sections */
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Make the table container fill the remaining space within the section */
+.table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  /* You already had horizontal scroll — keep it */
+  overflow-x: auto;
+  overflow-y: auto;        /* allow vertical scroll if content exceeds */
+}
+
+/* Optional (but helps keep controls visible and the table area stretching) */
+.controls {
+  flex: 0 0 auto;  /* controls take natural height at top of section */
+}
+
+/* Keep notes and other blocks from stealing flex height */
+.note, .divider, .chart-wrap, #vsOppWrap, #vsOppWrapFld {
+  flex: 0 0 auto;
+}
+``
+
 
 
 
